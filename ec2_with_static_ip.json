@@ -1,0 +1,58 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "just an ec2 instance",
+  "Parameters": {
+    "KeyName": {
+      "Description": "ssh-key",
+      "Type": "AWS::EC2::KeyPair::KeyName",
+      "ConstraintDescription": "ec2 keypair"
+    },
+    "InstanceType": {
+      "Description": "ec2 instance type",
+      "Type": "String",
+      "Default": "t2.nano",
+      "ConstraintDescription": "ec2 instance type"
+    },
+    "ImageId": {
+      "Description": "ami",
+      "Type": "String",
+      "ConstraintDescription": "ami"
+    },
+    "SecurityGroup": {
+      "Description": "security group",
+      "Type": "String",
+      "ConstraintDescription": "sg"
+    },
+    "PrivateIpAddress": {
+      "Description" :"ip address for the instance",
+      "Type": "String"
+    }
+  },
+  "Mappings": {},
+  "Resources": {
+    "TheInstance": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "KeyName": {
+          "Ref": "KeyName"
+        },
+        "InstanceType": {
+          "Ref": "InstanceType"
+        },
+        "ImageId": {
+          "Ref": "ImageId"
+        },
+        "SecurityGroupIds": [
+          {
+            "Ref": "SecurityGroup"
+          }
+        ],
+        "PrivateIpAddress": {
+          "Ref": "PrivateIpAddress"
+        }
+      }
+    }
+  },
+  "Outputs": {
+  }
+}
